@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchFilms } from "../services/api";
 import FilmCard from "./FilmCard";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import "../App.css";
 
 const FilmsContainer = () => {
@@ -34,6 +34,9 @@ const FilmsContainer = () => {
   return (
     <div className="app">
       <Container>
+        <Typography variant="h3" color="white">
+          Star Wars films
+        </Typography>
         <Grid container spacing={5}>
           {films.map((film) => (
             <FilmCard
