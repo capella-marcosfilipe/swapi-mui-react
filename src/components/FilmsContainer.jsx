@@ -25,10 +25,18 @@ const FilmsContainer = () => {
   });
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>I feel a great disturbance in the Force... Something is loading!</p>;
   }
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return (
+      <>
+        <p>
+          &quot;The Dark Side clouds everything. Impossible to see the API
+          is.&quot; - Yoda (probably)
+        </p>
+        <p>Error: {error.message}</p>;
+      </>
+    );
   }
 
   return (
