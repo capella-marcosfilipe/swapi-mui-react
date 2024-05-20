@@ -1,0 +1,53 @@
+import { useEffect, useState } from "react";
+import { fetchFilms } from "../services/api";
+import FilmCard from "./FilmCard";
+import { Container, Grid } from "@mui/material";
+import "../App.css";
+
+const FilmsContainer = () => {
+  const [films, setFilms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getFilms = async () => {
+      try {
+        const films = await fetchFilms();
+        setFilms(films.results);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+
+    getFilms();
+  });
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  return (
+    <div className="app">
+      <Container>
+        <Grid container spacing={5}>
+          {films.map((film) => (
+            <FilmCard
+              key={film}
+              title={film.title}
+              episodeId={film.episode_id}
+              openingCrawl={film.opening_crawl}
+              releaseDate={film.release_date}
+            />
+          ))}
+        </Grid>
+      </Container>
+    </div>
+  );
+};
+
+export default FilmsContainer;
